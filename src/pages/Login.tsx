@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import EstiasLogo from "../assets/EstiasLogo.png";
 import Button from "../components/Button";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-gray-600 flex justify-center items-center h-screen w-screen">
       <div className="bg-gray-800 flex justify-center items-center gap-5 flex-col rounded-sm px-8 w-85 text-white p-10">
@@ -27,7 +30,7 @@ export const Login = () => {
               placeholder="Password"
               required
             />
-            <Button text="Sign in" onClick={() => console.log("something")} />
+            <Button text="Sign in" onClick={() => navigate("/dashboard")} />
           </div>
         </form>
         <p>
