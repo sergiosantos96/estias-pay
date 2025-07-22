@@ -54,17 +54,17 @@ export const Login = () => {
   };
 
   return (
-    <div className="bg-gray-600 flex justify-center items-center h-screen w-screen">
-      <div className="bg-gray-800 flex justify-center items-center gap-5 flex-col rounded-sm py-7 px-8 w-85 text-white p-10">
+    <div className="flex h-screen w-screen items-center justify-center bg-gray-600">
+      <div className="flex w-85 flex-col items-center justify-center gap-5 rounded-sm bg-gray-800 p-10 px-8 py-7 text-white">
         <img className="block" src={EstiasLogo} alt="Estias-Heart-Logo" />
-        <h2 className="text-teal-100 font-medium text-lg">
+        <h2 className="text-lg font-medium text-teal-100">
           {mode === "login" ? "Sign in to your account" : "Create an account"}
         </h2>
 
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
             <input
-              className="bg-gray-600 rounded-md p-1 pl-4 pr-6 w-full"
+              className="w-full rounded-md bg-gray-600 p-1 pr-6 pl-4"
               type="email"
               name="email"
               id="email"
@@ -74,7 +74,7 @@ export const Login = () => {
               required
             />
             <input
-              className="bg-gray-600 rounded-md p-1 pl-4 pr-6 w-full"
+              className="w-full rounded-md bg-gray-600 p-1 pr-6 pl-4"
               type="password"
               name="password"
               id="password"
@@ -99,7 +99,7 @@ export const Login = () => {
               type="submit"
             />
           </div>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {error && <p className="mt-2 text-red-500">{error}</p>}
         </form>
 
         <p className="text-sm">
@@ -107,7 +107,7 @@ export const Login = () => {
             ? "Don't have an account?"
             : "Already have an account?"}
           <span
-            className="text-teal-600 cursor-pointer ml-1"
+            className="ml-1 cursor-pointer text-teal-600"
             onClick={() => {
               setError("");
               setMode(mode === "login" ? "register" : "login");

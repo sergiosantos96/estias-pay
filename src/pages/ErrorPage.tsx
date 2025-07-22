@@ -7,12 +7,12 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gray-50 flex justify-center items-center h-screen">
-      <div className="bg-white flex justify-center items-center gap-2 flex-col p-10 rounded-md w-1/4 shadow-md">
+    <div className="flex h-screen items-center justify-center bg-gray-50">
+      <div className="flex w-1/4 flex-col items-center justify-center gap-2 rounded-md bg-white p-10 shadow-md">
         <RiErrorWarningFill color="red" size={63} />
-        <h1 className="font-bold text-8xl text-gray-700">404</h1>
-        <h2 className="font-medium text-2xl text-gray-700">Page Not Found</h2>
-        <p className="text-gray-500 text-center my-4">
+        <h1 className="text-8xl font-bold text-gray-700">404</h1>
+        <h2 className="text-2xl font-medium text-gray-700">Page Not Found</h2>
+        <p className="my-4 text-center text-gray-500">
           Oops! It looks like the page you're looking for doesn't exist. Please
           check the URL or go back to the home page.
         </p>
