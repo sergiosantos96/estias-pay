@@ -9,8 +9,8 @@ const DashboardHeader = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="z-20 w-full bg-gradient-to-r from-teal-500 to-[#184C49]">
-      <div className="container mx-auto flex w-full items-center justify-between p-8">
+    <div className="z-20 w-full bg-gradient-to-r from-teal-500 to-[#184C49] py-5">
+      <div className="flex w-full items-center justify-between p-8">
         <img src={EstiasLogo} alt="Estias-Logo" />
         <div
           onClick={() => navigate("/")}
@@ -30,7 +30,7 @@ const DashboardHeader = () => {
         <span>4000€ budgeted</span>
       </div>
       <ProgressBar barColor="#90EE90" />
-      <div className="mb-6 flex justify-center">
+      <div className="mb-5 flex justify-center">
         <Button
           icon={<FaCoins />}
           text="Set Monthly Budget"
