@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EstiasLogo from "../assets/EstiasLogo.png";
 import Button from "../components/Button";
 
-export const Login = () => {
+export const LoginPage = () => {
   const navigate = useNavigate();
 
   const [mode, setMode] = useState<"login" | "register">("login");

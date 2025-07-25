@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   const baseClass =
-    "bg-teal-600 hover:bg-teal-700 transition duration-200 ease-in-out text-white text-base cursor-pointer rounded p-2 flex justify-center gap-2";
+    "bg-teal-500 hover:bg-teal-700 transition duration-200 ease-in-out text-white text-base cursor-pointer rounded p-2 px-4 flex justify-center items-center gap-2 rounded-full border border-teal-500";
 
   return (
     <button
