@@ -1,7 +1,8 @@
 import { FaClipboardList, FaPlus } from "react-icons/fa";
-import Button from "./Button";
+import Button from "./shared/Button";
 import Transaction from "./Transaction";
 import { useNavigate } from "react-router-dom";
+import SpendingCategories from "./SpendingCategories";
 
 const TransactionsList = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const TransactionsList = () => {
             onClick={() => navigate("/expenses")}
           />
         </div>
+        <SpendingCategories />
       </div>
     </div>
   );

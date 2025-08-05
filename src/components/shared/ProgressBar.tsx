@@ -1,15 +1,16 @@
 interface ProgressBarProps {
   barColor: string;
+  width: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ barColor }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ barColor, width }) => {
   return (
     <div className="mb-5 flex justify-center">
-      <div className="h-2.5 w-4/5 rounded-full bg-gray-200">
+      <div className="h-2.5 w-full rounded-full bg-gray-200">
         <div
           className="h-2.5 rounded-full"
           style={{
-            width: "70%",
+            width: `${width}%`,
             backgroundColor: barColor,
           }}
         ></div>

@@ -1,5 +1,5 @@
 import { RiErrorWarningFill } from "react-icons/ri";
-import Button from "../components/Button";
+import Button from "../components/shared/Button";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { FaCoins } from "react-icons/fa";
-import ProgressBar from "./ProgressBar";
-import Button from "./Button";
+import ProgressBar from "./shared/ProgressBar";
+import Button from "./shared/Button";
 import EstiasLogo from "../assets/EstiasLogoTextless.png";
 
 const DashboardHeader = () => {
@@ -29,7 +29,9 @@ const DashboardHeader = () => {
         <span>•</span>
         <span>4000€ budgeted</span>
       </div>
-      <ProgressBar barColor="#90EE90" />
+      <div className="mx-auto w-4/5">
+        <ProgressBar barColor="#90EE90" width={65} />
+      </div>
       <div className="mb-5 flex justify-center">
         <Button
           icon={<FaCoins />}

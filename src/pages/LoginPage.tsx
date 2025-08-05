@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EstiasLogo from "../assets/EstiasLogo.png";
-import Button from "../components/Button";
+import Button from "../components/shared/Button";
 
 export const LoginPage = () => {
   const navigate = useNavigate();

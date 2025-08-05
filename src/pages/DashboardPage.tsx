@@ -1,4 +1,4 @@
-import DashboardHeader from "../components/Header";
+import DashboardHeader from "../components/DashboardHeader";
 import PageContainer from "../components/PageContainer";
 import TransactionsList from "../components/TransactionsList";
 
