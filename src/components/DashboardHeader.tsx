@@ -4,9 +4,16 @@ import { FaCoins } from "react-icons/fa";
 import ProgressBar from "./shared/ProgressBar";
 import Button from "./shared/Button";
 import EstiasLogo from "../assets/EstiasLogoTextless.png";
+import { useState } from "react";
+import BudgetModal from "./shared/BudgetModal";
 
 const DashboardHeader = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSetBudget = (amount: string) => {
+    console.log("Budget Set To:", amount);
+  };
 
   return (
     <div className="z-20 w-full bg-gradient-to-r from-teal-500 to-[#184C49] py-5">
@@ -36,9 +43,14 @@ const DashboardHeader = () => {
         <Button
           icon={<FaCoins />}
           text="Set Monthly Budget"
-          onClick={() => console.log("clicked")}
+          onClick={() => setIsModalOpen(true)}
         />
       </div>
+      <BudgetModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleSetBudget}
+      />
     </div>
   );
 };
