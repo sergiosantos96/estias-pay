@@ -3,6 +3,8 @@ import Button from "./shared/Button";
 import Transaction from "./Transaction";
 import { useLocation, useNavigate } from "react-router-dom";
 import SpendingCategories from "./SpendingCategories";
+import AddExpenseModal from "./AddExpenseModal";
+import { useState } from "react";
 
 const TransactionsList = () => {
   const navigate = useNavigate();
@@ -10,8 +12,19 @@ const TransactionsList = () => {
 
   const isDashboard = location.pathname === "/dashboard";
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = (data: {
+    category: string;
+    amount: string;
+    date: string;
+    notes: string;
+  }) => {
+    console.log("Form submitted:", data);
+  };
+
   return (
-    <div className="z-50 w-full rounded-t-lg">
+    <div className="z-40 w-full rounded-t-lg">
       {isDashboard && (
         <div className="mt-4 flex items-center justify-between p-8">
           <h2 className="text-3xl font-medium text-gray-800">
@@ -20,7 +33,12 @@ const TransactionsList = () => {
           <Button
             icon={<FaPlus size={22} />}
             className="!rounded"
-            onClick={() => console.log("clicked")}
+            onClick={() => setIsModalOpen(true)}
+          />
+          <AddExpenseModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={handleSubmit}
           />
         </div>
       )}

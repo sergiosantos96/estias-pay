@@ -2,9 +2,22 @@ import { FaPlus } from "react-icons/fa6";
 import Button from "./shared/Button";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaFilter } from "react-icons/fa";
+import { useState } from "react";
+import AddExpenseModal from "./AddExpenseModal";
 
 const ExpensesHeader = () => {
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = (data: {
+    category: string;
+    amount: string;
+    date: string;
+    notes: string;
+  }) => {
+    console.log("Form submitted:", data);
+  };
 
   return (
     <nav className="relative mt-5 flex w-11/12 items-center justify-between bg-white text-teal-600">
@@ -24,12 +37,18 @@ const ExpensesHeader = () => {
         <Button
           icon={<FaPlus size={25} />}
           className="!rounded"
-          onClick={() => console.log("clicked")}
+          onClick={() => setIsModalOpen(true)}
         />
         <Button
           icon={<FaFilter size={25} />}
           className="!rounded"
           onClick={() => console.log("clicked")}
+        />
+
+        <AddExpenseModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleSubmit}
         />
       </div>
     </nav>

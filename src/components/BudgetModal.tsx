@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "./shared/Button";
+import LabeledInput from "./shared/LabeledInput";
 
 interface BudgetModalProps {
   isOpen: boolean;
@@ -18,26 +19,26 @@ const BudgetModal: React.FC<BudgetModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/10 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/10 text-gray-600 backdrop-blur-xs"
       onClick={onClose}
     >
       <div
         className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="mb-4 text-center text-2xl font-semibold text-gray-600">
+        <h2 className="mb-4 text-center text-2xl font-semibold">
           Set Monthly Budget
         </h2>
-        <input
+        <LabeledInput
+          id="budget"
+          label="Budget Amount (€)"
           type="number"
-          placeholder="Budget Amount €"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="mb-6 w-full rounded border border-gray-300 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none"
         />
-        <div className="flex justify-end gap-2">
+        <div className="mt-4 flex justify-end gap-2">
           <Button
-            className="!hover:bg-gray-200 rounded-lg !border-gray-700 !bg-gray-100 !text-gray-700"
+            className="rounded-lg !border-gray-200 !bg-gray-100 !text-gray-700 hover:!bg-gray-200"
             onClick={onClose}
             text="Cancel"
           />
