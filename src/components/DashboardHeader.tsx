@@ -30,7 +30,7 @@ const DashboardHeader = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Budget set successfully:", data);
+        await fetchBudget();
       } else {
         console.error("Failed to set budget:", data.message || data.error);
         alert("Failed to set budget: " + (data.message || data.error));
@@ -41,39 +41,44 @@ const DashboardHeader = () => {
     }
   };
 
-  useEffect(() => {
-    async function fetchBudget() {
-      try {
-        const response = await fetch(
-          "http://localhost/EstiasPay/server/api/Get-Budget.php",
-          {
-            credentials: "include",
-          },
-        );
+  const fetchBudget = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/EstiasPay/server/api/Get-Budget.php",
+        {
+          credentials: "include",
+        },
+      );
 
-        if (!response.ok) throw new Error("Failed to fetch budget");
+      if (!response.ok) throw new Error("Failed to fetch budget");
 
-        const data = await response.json();
+      const data = await response.json();
+      console.log("Fetched data:", data);
 
-        console.log("Fetched budget data:", data);
+      const parsedBudget = Number(
+        typeof data.amount === "string"
+          ? data.amount.replace(",", ".")
+          : data.amount,
+      );
 
-        if (data && data.budget !== undefined) {
-          const parsedBudget = Number(data.budget);
-          if (!isNaN(parsedBudget)) {
-            setBudget(parsedBudget);
-            console.log("Valid budget:", parsedBudget);
-          } else {
-            setBudget(0);
-            console.log("Invalid budget value received:", data.budget);
-          }
+      if (data && data.amount !== undefined) {
+        if (!isNaN(parsedBudget)) {
+          setBudget(parsedBudget);
+          console.log("Valid budget:", parsedBudget);
         } else {
           setBudget(0);
-          console.log("No budget found in response");
+          console.log("Invalid budget value received:", data.amount);
         }
-      } catch (err) {
-        console.error("Error fetching budget:", err);
+      } else {
+        setBudget(0);
+        console.log("No amount found in response");
       }
+    } catch (err) {
+      console.error("Error fetching budget:", err);
     }
+  };
+
+  useEffect(() => {
     fetchBudget();
   }, []);
 
