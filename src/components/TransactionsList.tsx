@@ -4,7 +4,8 @@ import Transaction from "./Transaction";
 import { useLocation, useNavigate } from "react-router-dom";
 import SpendingCategories from "./SpendingCategories";
 import AddExpenseModal from "./AddExpenseModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { ExpenseProps } from "../models/models";
 
 const TransactionsList = () => {
   const navigate = useNavigate();
@@ -13,16 +14,65 @@ const TransactionsList = () => {
   const isDashboard = location.pathname === "/dashboard";
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expenses, setExpenses] = useState<ExpenseProps[]>([]);
 
-  const handleSubmit = (data: {
+  const fetchExpenses = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/EstiasPay/server/api/Get-Expenses.php",
+        {
+          credentials: "include",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch expenses");
+      }
+
+      const data = await response.json();
+      setExpenses(data);
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+      alert("Could not load expenses.");
+    }
+  };
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
+  const handleSubmit = async (data: {
     category: string;
     amount: string;
     date: string;
-    notes: string;
+    notes?: string;
   }) => {
-    console.log("Form submitted:", data);
-  };
+    try {
+      const response = await fetch(
+        "http://localhost/EstiasPay/server/api/Add-Expenses.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(data),
+        },
+      );
 
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Failed to add expense");
+      }
+
+      console.log("Expense added successfully");
+      setIsModalOpen(false);
+      fetchExpenses();
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Failed to add expense. Try again.");
+    }
+  };
   return (
     <div className="z-40 w-full rounded-t-lg">
       {isDashboard && (
@@ -44,18 +94,26 @@ const TransactionsList = () => {
       )}
 
       <div className="px-8">
-        <Transaction
-          category="electricity"
-          price="-70,00€"
-          date="08 Jul 2025 9:43"
-          notes="Paid via bank transfer"
-        />
-        <Transaction
-          category="electricity"
-          price="-70,00€"
-          date="08 Jul 2025 9:43"
-          notes="Paid via bank transfer"
-        />
+        {expenses.length > 0 ? (
+          expenses.slice(0, 5).map((expense) => (
+            <Transaction
+              key={expense.id}
+              category={expense.category}
+              amount={`${Number(expense.amount).toFixed(2)}€`}
+              date={new Date(expense.date).toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              notes={expense.notes}
+            />
+          ))
+        ) : (
+          <p className="text-gray-500">No transactions yet.</p>
+        )}
+
         {isDashboard && (
           <div>
             <div className="flex justify-center">

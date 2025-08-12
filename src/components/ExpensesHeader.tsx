@@ -14,7 +14,7 @@ const ExpensesHeader = () => {
     category: string;
     amount: string;
     date: string;
-    notes: string;
+    notes?: string;
   }) => {
     console.log("Form submitted:", data);
   };

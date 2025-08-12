@@ -1,14 +1,11 @@
+import { useState } from "react";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { IoChevronDown } from "react-icons/io5";
+import type { ExpenseProps } from "../models/models";
 
-interface TransactionProps {
-  category: string;
-  price: string;
-  date: string;
-  notes?: string;
-}
+const Transaction = ({ category, amount, date, notes }: ExpenseProps) => {
+  const [showNotes, setShowNotes] = useState(true);
 
-const Transaction = ({ category, price, date, notes }: TransactionProps) => {
   return (
     <div className="my-7 rounded border border-gray-200 bg-white p-7 py-5 text-gray-600 shadow-md">
       <div className="flex w-full flex-row items-center justify-between">
@@ -24,13 +21,24 @@ const Transaction = ({ category, price, date, notes }: TransactionProps) => {
           </div>
         </div>
         <div className="flex items-center gap-x-2 text-right">
-          <h2 className="text-3xl font-semibold text-pink-600">{price} </h2>
-          <IoChevronDown
-            className="cursor-pointer transition duration-350 ease-in-out active:rotate-x-180"
-            size={28}
-          />
+          <h2 className="text-3xl font-semibold text-pink-600">{amount} </h2>
+          {notes?.trim() && (
+            <IoChevronDown
+              onClick={() => setShowNotes((prev) => !prev)}
+              className={`cursor-pointer transition-transform duration-300 ${
+                showNotes ? "rotate-180" : ""
+              }`}
+              size={28}
+            />
+          )}
         </div>
       </div>
+      {notes?.trim() && showNotes && (
+        <div className="mt-5 flex flex-col border-t-2 border-gray-300">
+          <h2 className="mt-3 font-medium text-gray-800">Notes:</h2>
+          <p>{notes}</p>
+        </div>
+      )}
     </div>
   );
 };

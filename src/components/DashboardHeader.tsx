@@ -53,7 +53,6 @@ const DashboardHeader = () => {
       if (!response.ok) throw new Error("Failed to fetch budget");
 
       const data = await response.json();
-      console.log("Fetched data:", data);
 
       const parsedBudget = Number(
         typeof data.amount === "string"
@@ -64,7 +63,6 @@ const DashboardHeader = () => {
       if (data && data.amount !== undefined) {
         if (!isNaN(parsedBudget)) {
           setBudget(parsedBudget);
-          console.log("Valid budget:", parsedBudget);
         } else {
           setBudget(0);
           console.log("Invalid budget value received:", data.amount);
