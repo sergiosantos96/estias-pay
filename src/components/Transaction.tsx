@@ -2,16 +2,29 @@ import { useState } from "react";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { IoChevronDown } from "react-icons/io5";
 import type { ExpenseData } from "../models/models";
+import { categoryIcons } from "../constants/categoryIcons";
 
 const Transaction = ({ category, amount, date, notes }: ExpenseData) => {
   const [showNotes, setShowNotes] = useState(true);
+
+  const {
+    icon: IconComponent,
+    bgColorClass,
+    iconColorClass,
+  } = categoryIcons[category] || {
+    icon: AiFillThunderbolt,
+    bgColorClass: "bg-pink-100",
+    iconColorClass: "text-pink-600",
+  };
 
   return (
     <div className="my-7 rounded border border-gray-200 bg-white p-7 py-5 text-gray-600 shadow-md">
       <div className="flex w-full flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-x-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-pink-100">
-            <AiFillThunderbolt color="#DB2777" size={38} />
+          <div
+            className={`flex h-16 w-16 items-center justify-center rounded-lg ${bgColorClass}`}
+          >
+            <IconComponent className={iconColorClass} size={38} />
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h2 className="text-2xl font-medium text-gray-600 capitalize">
@@ -21,7 +34,13 @@ const Transaction = ({ category, amount, date, notes }: ExpenseData) => {
           </div>
         </div>
         <div className="flex items-center gap-x-2 text-right">
-          <h2 className="text-3xl font-semibold text-pink-600">{amount} </h2>
+          <h2
+            className={`text-3xl font-semibold ${
+              amount.trim().startsWith("-") ? "text-pink-600" : "text-teal-500"
+            }`}
+          >
+            {amount}
+          </h2>
           {notes?.trim() && (
             <IoChevronDown
               onClick={() => setShowNotes((prev) => !prev)}

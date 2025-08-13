@@ -19,7 +19,6 @@ export interface BudgetModalProps {
 }
 
 export interface CurrentBalance {
-  balance: number;
   expenses: number;
   income: number;
 }

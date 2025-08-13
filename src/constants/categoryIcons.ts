@@ -1,0 +1,43 @@
+import {
+  AiFillHome,
+  AiFillShopping,
+  AiFillCar,
+  AiFillThunderbolt,
+  AiFillHeart,
+  AiFillDollarCircle,
+  AiFillSafetyCertificate,
+  AiOutlineBank,
+  AiOutlineSmile,
+  AiOutlineGift,
+  AiOutlineBook,
+  AiOutlineUsergroupAdd,
+  AiOutlineFieldTime,
+  AiOutlineSkin,
+  AiOutlineSync,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
+
+export const categoryIcons: Record<
+  string,
+  { icon: React.ElementType; bgColorClass: string; iconColorClass: string }
+> = {
+  housing: { icon: AiFillHome, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  food: { icon: AiFillShopping, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  transportation: { icon: AiFillCar, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  utilities: { icon: AiFillThunderbolt, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  insurance: { icon: AiFillSafetyCertificate, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  healthcare: { icon: AiFillHeart, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  debt: { icon: AiFillDollarCircle, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  savings: { icon: AiOutlineBank, bgColorClass: "bg-teal-100", iconColorClass: "text-teal-800" }, 
+  wagepay: { icon: AiOutlineBank, bgColorClass: "bg-teal-100", iconColorClass: "text-teal-800" }, 
+  salary: { icon: AiOutlineBank, bgColorClass: "bg-teal-100", iconColorClass: "text-teal-800" }, 
+  personal_care: { icon: AiOutlineSmile, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  entertainment: { icon: AiOutlineSmile, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  education: { icon: AiOutlineBook, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  gifts_donations: { icon: AiOutlineGift, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  childcare: { icon: AiOutlineUsergroupAdd, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  pet_care: { icon: AiOutlineFieldTime, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  clothing: { icon: AiOutlineSkin, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  subscriptions: { icon: AiOutlineSync, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+  misc: { icon: AiOutlineQuestionCircle, bgColorClass: "bg-pink-100", iconColorClass: "text-pink-600" },
+};

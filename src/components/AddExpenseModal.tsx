@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LabeledInput from "./shared/LabeledInput";
 import Button from "./shared/Button";
 import type { AddExpenseProps } from "../models/models";
+import { expenseCategories } from "../constants/categories";
 
 const AddExpenseModal: React.FC<AddExpenseProps> = ({
   isOpen,
@@ -31,11 +32,7 @@ const AddExpenseModal: React.FC<AddExpenseProps> = ({
           id="category"
           label="Category"
           value={category}
-          options={[
-            { label: "Housing", value: "housing" },
-            { label: "Food", value: "food" },
-            { label: "Transportation", value: "transport" },
-          ]}
+          options={expenseCategories}
           onChange={(e) => setCategory(e.target.value)}
         />
         <LabeledInput

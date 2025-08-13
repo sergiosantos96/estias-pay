@@ -5,14 +5,35 @@ import { FaArrowLeft, FaFilter } from "react-icons/fa";
 import { useState } from "react";
 import AddExpenseModal from "./AddExpenseModal";
 import type { ExpenseData } from "../models/models";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 const ExpensesHeader = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (data: ExpenseData) => {
-    console.log("Form submitted:", data);
+  const handleSubmit = async (data: ExpenseData) => {
+    try {
+      const response = await fetch(API_ENDPOINTS.ADD_EXPENSE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Failed to add expense");
+      }
+
+      console.log("Expense added successfully");
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Failed to add expense. Try again.");
+    }
   };
 
   return (
