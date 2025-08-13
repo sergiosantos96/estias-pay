@@ -1,12 +1,7 @@
 import { useState } from "react";
 import Button from "./shared/Button";
 import LabeledInput from "./shared/LabeledInput";
-
-interface BudgetModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (amount: string) => void;
-}
+import type { BudgetModalProps } from "../models/models";
 
 const BudgetModal: React.FC<BudgetModalProps> = ({
   isOpen,

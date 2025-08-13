@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import LabeledInput from "./shared/LabeledInput";
 import Button from "./shared/Button";
-import type { ExpenseProps } from "../models/models";
-
-/* interface ExpenseData {
-  category: string;
-  amount: string;
-  date: string;
-  notes?: string;
-} */
-
-interface AddExpenseProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: ExpenseProps) => void;
-}
+import type { AddExpenseProps } from "../models/models";
 
 const AddExpenseModal: React.FC<AddExpenseProps> = ({
   isOpen,

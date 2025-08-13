@@ -1,10 +1,4 @@
-interface ButtonProps {
-  text?: string;
-  type?: "button" | "submit";
-  icon?: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-}
+import type { ButtonProps } from "../../models/models";
 
 const Button: React.FC<ButtonProps> = ({
   text,

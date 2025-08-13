@@ -1,9 +1,5 @@
+import type { SpendingCategory } from "../models/models";
 import ProgressBar from "./shared/ProgressBar";
-
-interface SpendingCategory {
-  category: string;
-  expense: number;
-}
 
 const SpendingCategory: React.FC<SpendingCategory> = ({
   category,

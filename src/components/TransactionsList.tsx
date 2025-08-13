@@ -5,7 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SpendingCategories from "./SpendingCategories";
 import AddExpenseModal from "./AddExpenseModal";
 import { useEffect, useState } from "react";
-import type { ExpenseProps } from "../models/models";
+import type { ExpenseData } from "../models/models";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 const TransactionsList = () => {
   const navigate = useNavigate();
@@ -14,16 +15,13 @@ const TransactionsList = () => {
   const isDashboard = location.pathname === "/dashboard";
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [expenses, setExpenses] = useState<ExpenseProps[]>([]);
+  const [expenses, setExpenses] = useState<ExpenseData[]>([]);
 
   const fetchExpenses = async () => {
     try {
-      const response = await fetch(
-        "http://localhost/EstiasPay/server/api/Get-Expenses.php",
-        {
-          credentials: "include",
-        },
-      );
+      const response = await fetch(API_ENDPOINTS.GET_EXPENSES, {
+        credentials: "include",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch expenses");
@@ -41,24 +39,16 @@ const TransactionsList = () => {
     fetchExpenses();
   }, []);
 
-  const handleSubmit = async (data: {
-    category: string;
-    amount: string;
-    date: string;
-    notes?: string;
-  }) => {
+  const handleSubmit = async (data: ExpenseData) => {
     try {
-      const response = await fetch(
-        "http://localhost/EstiasPay/server/api/Add-Expenses.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(data),
+      const response = await fetch(API_ENDPOINTS.ADD_EXPENSE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
 
       if (!response.ok) {
         const result = await response.json();

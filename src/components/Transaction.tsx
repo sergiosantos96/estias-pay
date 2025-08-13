@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { IoChevronDown } from "react-icons/io5";
-import type { ExpenseProps } from "../models/models";
+import type { ExpenseData } from "../models/models";
 
-const Transaction = ({ category, amount, date, notes }: ExpenseProps) => {
+const Transaction = ({ category, amount, date, notes }: ExpenseData) => {
   const [showNotes, setShowNotes] = useState(true);
 
   return (

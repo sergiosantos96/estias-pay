@@ -4,18 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaFilter } from "react-icons/fa";
 import { useState } from "react";
 import AddExpenseModal from "./AddExpenseModal";
+import type { ExpenseData } from "../models/models";
 
 const ExpensesHeader = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (data: {
-    category: string;
-    amount: string;
-    date: string;
-    notes?: string;
-  }) => {
+  const handleSubmit = (data: ExpenseData) => {
     console.log("Form submitted:", data);
   };
 

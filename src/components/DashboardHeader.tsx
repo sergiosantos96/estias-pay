@@ -6,6 +6,7 @@ import Button from "./shared/Button";
 import EstiasLogo from "../assets/EstiasLogoTextless.png";
 import { useEffect, useState } from "react";
 import BudgetModal from "./BudgetModal";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 const DashboardHeader = () => {
   const navigate = useNavigate();
@@ -15,17 +16,14 @@ const DashboardHeader = () => {
 
   const handleSetBudget = async (amount: string) => {
     try {
-      const response = await fetch(
-        "http://localhost/EstiasPay/server/api/Set-Budget.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ amount }),
+      const response = await fetch(API_ENDPOINTS.SET_BUDGET, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        credentials: "include",
+        body: JSON.stringify({ amount }),
+      });
 
       const data = await response.json();
 
@@ -43,12 +41,9 @@ const DashboardHeader = () => {
 
   const fetchBudget = async () => {
     try {
-      const response = await fetch(
-        "http://localhost/EstiasPay/server/api/Get-Budget.php",
-        {
-          credentials: "include",
-        },
-      );
+      const response = await fetch(API_ENDPOINTS.GET_BUDGET, {
+        credentials: "include",
+      });
 
       if (!response.ok) throw new Error("Failed to fetch budget");
 

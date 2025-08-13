@@ -1,11 +1,6 @@
 import { FaWallet } from "react-icons/fa";
 import { FaDownLong, FaUpLong } from "react-icons/fa6";
-
-interface CurrentBalance {
-  balance: number;
-  expenses: number;
-  income: number;
-}
+import type { CurrentBalance } from "../models/models";
 
 const CurrentBalance: React.FC<CurrentBalance> = ({
   balance,

@@ -1,7 +1,4 @@
-interface ProgressBarProps {
-  barColor: string;
-  width: number;
-}
+import type { ProgressBarProps } from "../../models/models";
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ barColor, width }) => {
   return (
