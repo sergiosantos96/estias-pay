@@ -41,4 +41,17 @@ export interface ButtonProps {
   className?: string;
 }
 
+export interface FilterProps {
+  category: string;
+  minPrice: string;
+  maxPrice: string;
+  minDate: string;
+  maxDate: string;
+}
 
+export interface AddFilterProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: FilterProps) => void;
+  onResetFilters: () => void;
+}

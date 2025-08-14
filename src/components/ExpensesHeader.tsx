@@ -4,13 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaFilter } from "react-icons/fa";
 import { useState } from "react";
 import AddExpenseModal from "./AddExpenseModal";
-import type { ExpenseData } from "../models/models";
+import type { ExpenseData, FilterProps } from "../models/models";
 import { API_ENDPOINTS } from "../config/apiConfig";
+import FiltersModal from "./FiltersModal";
 
-const ExpensesHeader = () => {
+const ExpensesHeader = ({
+  onSubmitFilters,
+}: {
+  onSubmitFilters: (filters: FilterProps) => void;
+}) => {
   const navigate = useNavigate();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
+  const [isFiltersModalOpen, setIsFilterModalOpen] = useState(false);
 
   const handleSubmit = async (data: ExpenseData) => {
     try {
@@ -29,7 +35,7 @@ const ExpensesHeader = () => {
       }
 
       console.log("Expense added successfully");
-      setIsModalOpen(false);
+      setIsAddExpenseModalOpen(false);
     } catch (error) {
       console.error("Network error:", error);
       alert("Failed to add expense. Try again.");
@@ -54,17 +60,35 @@ const ExpensesHeader = () => {
         <Button
           icon={<FaPlus size={25} />}
           className="!rounded"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => setIsAddExpenseModalOpen(true)}
         />
         <Button
           icon={<FaFilter size={25} />}
           className="!rounded"
-          onClick={() => console.log("clicked")}
+          onClick={() => setIsFilterModalOpen(true)}
+        />
+
+        <FiltersModal
+          isOpen={isFiltersModalOpen}
+          onClose={() => setIsFilterModalOpen(false)}
+          onSubmit={(filters) => {
+            onSubmitFilters(filters);
+            setIsFilterModalOpen(false);
+          }}
+          onResetFilters={() => {
+            onSubmitFilters({
+              category: "",
+              minPrice: "",
+              maxPrice: "",
+              minDate: "",
+              maxDate: "",
+            });
+          }}
         />
 
         <AddExpenseModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          isOpen={isAddExpenseModalOpen}
+          onClose={() => setIsAddExpenseModalOpen(false)}
           onSubmit={handleSubmit}
         />
       </div>

@@ -12,6 +12,7 @@ type CommonProps = {
   className?: string;
   inputClassName?: string;
   placeholder?: string;
+  required?: boolean;
 };
 
 type InputFieldProps = CommonProps & {
@@ -43,6 +44,7 @@ const LabeledField: React.FC<LabeledFieldProps> = (props) => {
     className = "",
     inputClassName = "",
     placeholder,
+    required = false,
   } = props;
 
   return (
@@ -59,15 +61,14 @@ const LabeledField: React.FC<LabeledFieldProps> = (props) => {
           rows={props.rows ?? 4}
           placeholder={placeholder}
           className={`mb-3 w-full resize-none rounded border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none ${inputClassName}`}
-          required
         />
       ) : props.as === "select" ? (
         <select
           id={id}
           value={value}
           onChange={onChange}
+          required={required}
           className={`mb-3 w-full rounded border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none ${inputClassName}`}
-          required
         >
           <option value="" disabled>
             {placeholder || "Select an option"}
@@ -85,8 +86,8 @@ const LabeledField: React.FC<LabeledFieldProps> = (props) => {
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          required={required}
           className={`mb-3 w-full rounded border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none ${inputClassName}`}
-          required
         />
       )}
     </div>

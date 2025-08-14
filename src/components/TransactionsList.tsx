@@ -5,10 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SpendingCategories from "./SpendingCategories";
 import AddExpenseModal from "./AddExpenseModal";
 import { useEffect, useState } from "react";
-import type { ExpenseData } from "../models/models";
+import type { ExpenseData, FilterProps } from "../models/models";
 import { API_ENDPOINTS } from "../config/apiConfig";
 
-const TransactionsList = () => {
+const TransactionsList = ({ filters }: { filters: FilterProps }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,6 +63,19 @@ const TransactionsList = () => {
       alert("Failed to add expense. Try again.");
     }
   };
+
+  const filteredExpenses = expenses.filter((expense) => {
+    const amount = Number(expense.amount);
+    const expenseDate = new Date(expense.date);
+
+    return (
+      (!filters.category || expense.category === filters.category) &&
+      (!filters.minPrice || amount >= Number(filters.minPrice)) &&
+      (!filters.maxPrice || amount <= Number(filters.maxPrice)) &&
+      (!filters.minDate || expenseDate >= new Date(filters.minDate)) &&
+      (!filters.maxDate || expenseDate <= new Date(filters.maxDate))
+    );
+  });
   return (
     <div className="z-40 w-full rounded-t-lg">
       {isDashboard && (
@@ -84,8 +97,8 @@ const TransactionsList = () => {
       )}
 
       <div className="px-8">
-        {expenses.length > 0 ? (
-          expenses.slice(0, 5).map((expense) => (
+        {filteredExpenses.length > 0 ? (
+          filteredExpenses.slice(0, 5).map((expense) => (
             <Transaction
               key={expense.id}
               category={expense.category}
