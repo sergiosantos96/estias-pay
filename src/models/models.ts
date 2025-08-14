@@ -55,3 +55,10 @@ export interface AddFilterProps {
   onSubmit: (data: FilterProps) => void;
   onResetFilters: () => void;
 }
+
+export interface UnsavedChangesModalProps {
+   isOpen: boolean;
+  onSave: () => void;
+  onDiscard: () => void;
+  onClose?: () => void;
+}

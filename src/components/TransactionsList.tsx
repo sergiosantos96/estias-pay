@@ -64,18 +64,23 @@ const TransactionsList = ({ filters }: { filters: FilterProps }) => {
     }
   };
 
-  const filteredExpenses = expenses.filter((expense) => {
-    const amount = Number(expense.amount);
-    const expenseDate = new Date(expense.date);
+  const filteredExpenses = !isDashboard
+    ? expenses.filter((expense) => {
+        const amount = Number(expense.amount);
+        const expenseDate = new Date(expense.date);
 
-    return (
-      (!filters.category || expense.category === filters.category) &&
-      (!filters.minPrice || amount >= Number(filters.minPrice)) &&
-      (!filters.maxPrice || amount <= Number(filters.maxPrice)) &&
-      (!filters.minDate || expenseDate >= new Date(filters.minDate)) &&
-      (!filters.maxDate || expenseDate <= new Date(filters.maxDate))
-    );
-  });
+        return (
+          (!filters.category || expense.category === filters.category) &&
+          (!filters.minPrice || amount >= Number(filters.minPrice)) &&
+          (!filters.maxPrice || amount <= Number(filters.maxPrice)) &&
+          (!filters.minDate || expenseDate >= new Date(filters.minDate)) &&
+          (!filters.maxDate || expenseDate <= new Date(filters.maxDate))
+        );
+      })
+    : [];
+
+  const transactionsToDisplay = isDashboard ? expenses : filteredExpenses;
+
   return (
     <div className="z-40 w-full rounded-t-lg">
       {isDashboard && (
@@ -97,8 +102,8 @@ const TransactionsList = ({ filters }: { filters: FilterProps }) => {
       )}
 
       <div className="px-8">
-        {filteredExpenses.length > 0 ? (
-          filteredExpenses.slice(0, 5).map((expense) => (
+        {transactionsToDisplay.length > 0 ? (
+          transactionsToDisplay.slice(0, 5).map((expense) => (
             <Transaction
               key={expense.id}
               category={expense.category}

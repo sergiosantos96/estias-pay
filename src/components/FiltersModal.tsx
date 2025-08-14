@@ -4,6 +4,7 @@ import type { AddFilterProps } from "../models/models";
 
 import React, { useState } from "react";
 import Button from "./shared/Button";
+import UnsavedChangesModal from "./shared/UnsavedChangesModal";
 
 const FiltersModal: React.FC<AddFilterProps> = ({
   isOpen,
@@ -16,6 +17,7 @@ const FiltersModal: React.FC<AddFilterProps> = ({
   const [maxPrice, setMaxPrice] = useState("");
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
 
   const resetFilters = () => {
     setCategory("");
@@ -25,12 +27,35 @@ const FiltersModal: React.FC<AddFilterProps> = ({
     setMaxDate("");
   };
 
+  const hasUnsavedChanges = () => {
+    return category || minPrice || maxPrice || minDate || maxDate;
+  };
+
+  const handleCloseAttempt = () => {
+    if (hasUnsavedChanges()) {
+      setShowWarning(true);
+    } else {
+      resetFilters();
+      onClose();
+    }
+  };
+
+  const handleClose = () => {
+    setShowWarning(false);
+    resetFilters();
+    onClose();
+  };
+
+  const handleStayAndClose = () => {
+    setShowWarning(false);
+  };
+
   if (!isOpen) return null;
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-white/10 text-gray-600 backdrop-blur-xs"
-      onClick={onClose}
+      onClick={handleCloseAttempt}
     >
       <div
         className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg"
@@ -111,6 +136,12 @@ const FiltersModal: React.FC<AddFilterProps> = ({
           </div>
         </form>
       </div>
+      <UnsavedChangesModal
+        isOpen={showWarning}
+        onSave={handleStayAndClose}
+        onDiscard={handleClose}
+        onClose={() => setShowWarning(false)}
+      />
     </div>
   );
 };

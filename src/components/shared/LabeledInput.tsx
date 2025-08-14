@@ -60,7 +60,8 @@ const LabeledField: React.FC<LabeledFieldProps> = (props) => {
           onChange={onChange}
           rows={props.rows ?? 4}
           placeholder={placeholder}
-          className={`mb-3 w-full resize-none rounded border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none ${inputClassName}`}
+          maxLength={100}
+          className={`w-full resize-none rounded border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-teal-500 focus:outline-none ${inputClassName}`}
         />
       ) : props.as === "select" ? (
         <select
