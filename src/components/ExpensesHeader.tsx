@@ -7,6 +7,7 @@ import AddExpenseModal from "./AddExpenseModal";
 import type { ExpenseData, FilterProps } from "../models/models";
 import { API_ENDPOINTS } from "../config/apiConfig";
 import FiltersModal from "./FiltersModal";
+import useWindowSize from "../hooks/useWindowsResize";
 
 const ExpensesHeader = ({
   onSubmitFilters,
@@ -14,6 +15,7 @@ const ExpensesHeader = ({
   onSubmitFilters: (filters: FilterProps) => void;
 }) => {
   const navigate = useNavigate();
+  const windowWidth = useWindowSize();
 
   const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
   const [isFiltersModalOpen, setIsFilterModalOpen] = useState(false);
@@ -43,27 +45,27 @@ const ExpensesHeader = ({
   };
 
   return (
-    <nav className="relative mt-5 flex w-11/12 items-center justify-between bg-white text-teal-600">
+    <nav className="relative flex w-full items-center justify-between bg-white text-teal-600">
       <div>
         <Button
-          icon={<FaArrowLeft size={25} />}
+          icon={<FaArrowLeft size={windowWidth <= 470 ? 16 : 21} />}
           className="!rounded"
           onClick={() => navigate("/dashboard")}
         />
       </div>
 
-      <h2 className="absolute left-1/2 -translate-x-1/2 text-3xl font-semibold">
+      <h2 className="text-center text-2xl font-semibold sm:text-3xl">
         Expenses
       </h2>
 
-      <div className="flex gap-x-2">
+      <div className="flex gap-x-2 sm:gap-x-4">
         <Button
-          icon={<FaPlus size={25} />}
+          icon={<FaPlus size={windowWidth <= 470 ? 16 : 21} />}
           className="!rounded"
           onClick={() => setIsAddExpenseModalOpen(true)}
         />
         <Button
-          icon={<FaFilter size={25} />}
+          icon={<FaFilter size={windowWidth <= 470 ? 16 : 21} />}
           className="!rounded"
           onClick={() => setIsFilterModalOpen(true)}
         />

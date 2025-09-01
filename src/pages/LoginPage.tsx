@@ -55,7 +55,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-600">
+    <div className="flex h-screen w-screen items-center justify-center bg-gray-600 px-4">
       <div className="flex w-85 flex-col items-center justify-center gap-5 rounded-sm bg-gray-800 p-10 px-8 py-7 text-white">
         <img className="block" src={EstiasLogo} alt="Estias-Heart-Logo" />
         <h2 className="text-lg font-medium text-teal-100">

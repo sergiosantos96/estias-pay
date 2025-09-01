@@ -14,7 +14,7 @@ export const ExpensesPage = () => {
   });
 
   return (
-    <div className="flex w-dvw flex-col items-center justify-center">
+    <div className="flex w-dvw flex-col items-center justify-center p-8">
       <ExpensesHeader onSubmitFilters={setFilters} />
       <CurrentBalance expenses={2651} income={4000} />
       <TransactionsList filters={filters} />

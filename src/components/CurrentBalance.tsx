@@ -44,10 +44,10 @@ const CurrentBalance: React.FC<CurrentBalance> = ({ expenses, income }) => {
   }, []);
 
   return (
-    <div className="mt-5 w-11/12 rounded border border-gray-200 bg-white px-6 py-5 text-gray-600 shadow-md">
+    <div className="mt-5 w-full rounded border border-gray-200 bg-white px-6 py-5 text-gray-600 shadow-md">
       <div className="mb-5 flex flex-col items-center">
         <h3>Current balance</h3>
-        <div className="mt-3 flex items-center gap-x-2">
+        <div className="mt-3 mb-6 flex items-center gap-x-2">
           <FaWallet color="#00bba7" size={25} />
           <h2 className="text-3xl font-semibold text-teal-600">
             {budget !== null ? `${budget.toFixed(2)} €` : "0.00"}
@@ -57,13 +57,11 @@ const CurrentBalance: React.FC<CurrentBalance> = ({ expenses, income }) => {
         <div className="mt-2 flex w-full items-center justify-between text-xl">
           <div className="flex items-center text-pink-600">
             <FaDownLong color="#AD1457" size={22} />
-            <h3>Expenses: -{expenses}€</h3>
+            <h3 className="text-md">Expenses: -{expenses}€</h3>
           </div>
-          <div>
-            <div className="flex items-center text-teal-600">
-              <FaUpLong color="#009689" size={22} />
-              <h3>Income: +{income}€</h3>
-            </div>
+          <div className="flex items-center text-right text-teal-600 sm:text-left">
+            <FaUpLong color="#009689" size={22} />
+            <h3>Income: +{income}€</h3>
           </div>
         </div>
       </div>
