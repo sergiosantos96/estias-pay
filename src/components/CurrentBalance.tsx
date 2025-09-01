@@ -57,14 +57,14 @@ const CurrentBalance: React.FC<CurrentBalanceProps> = ({
           </h2>
         </div>
 
-        <div className="mt-2 flex w-full items-center justify-between text-xl">
+        <div className="mt-2 flex w-full items-center justify-between text-lg">
           <div className="flex items-center text-pink-600">
             <FaDownLong color="#AD1457" size={22} />
             <h3 className="text-md">Expenses: -{expenses}€</h3>
           </div>
-          <div className="flex items-center text-right text-teal-600 sm:text-left">
+          <div className="flex items-center justify-end text-teal-600 sm:justify-start">
             <FaUpLong color="#009689" size={22} />
-            <h3>Income: +{income}€</h3>
+            <h3 className="ml-2 whitespace-nowrap">Income: +{income}€</h3>
           </div>
         </div>
       </div>
