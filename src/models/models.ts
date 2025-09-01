@@ -18,7 +18,7 @@ export interface BudgetModalProps {
   onSubmit: (amount: string) => void;
 }
 
-export interface CurrentBalance {
+export interface CurrentBalanceProps {
   expenses: number;
   income: number;
 }
@@ -61,4 +61,34 @@ export interface UnsavedChangesModalProps {
   onSave: () => void;
   onDiscard: () => void;
   onClose?: () => void;
+}
+
+export const topLevelCategoryMap: Record<string, string> = {
+  housing: "Housing",
+  utilities: "Utilities",
+  food: "Food & Drinking",
+  transportation: "Utilities",
+  insurance: "Housing",
+  healthcare: "Utilities",
+  debt: "Utilities",
+  savings: "Utilities",
+  personal_care: "Utilities",
+  entertainment: "Food & Drinking",
+  education: "Utilities",
+  gifts_donations: "Food & Drinking",
+  childcare: "Utilities",
+  pet_care: "Utilities",
+  clothing: "Food & Drinking",
+  subscriptions: "Utilities",
+  misc: "Utilities",
+};
+
+export interface SpendingCategoriesProps {
+  expenses: ExpenseData[];
+}
+
+export interface SpendingCategoryProps {
+  category: string;
+  expense: number;
+  percentage: number;
 }

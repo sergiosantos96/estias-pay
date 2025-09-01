@@ -1,9 +1,10 @@
-import type { SpendingCategory } from "../models/models";
+import type { SpendingCategoryProps } from "../models/models";
 import ProgressBar from "./shared/ProgressBar";
 
-const SpendingCategory: React.FC<SpendingCategory> = ({
+const SpendingCategory: React.FC<SpendingCategoryProps> = ({
   category,
   expense,
+  percentage,
 }) => {
   return (
     <div>
@@ -12,11 +13,14 @@ const SpendingCategory: React.FC<SpendingCategory> = ({
           {category}
         </h3>
         <h3 className="mt-3 text-xl font-semibold text-pink-600 sm:mt-0 sm:text-2xl">
-          {expense}€
+          {expense.toFixed(2)}€
         </h3>
       </div>
       <div className="mt-3">
-        <ProgressBar barColor="#EC4899" width={70} />
+        <ProgressBar barColor="#EC4899" width={percentage} />
+        <p className="mt-1 text-right text-sm text-gray-500">
+          {percentage.toFixed(1)}%
+        </p>
       </div>
     </div>
   );

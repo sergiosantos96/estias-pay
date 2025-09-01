@@ -3,40 +3,25 @@ import Button from "./shared/Button";
 import Transaction from "./Transaction";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddExpenseModal from "./AddExpenseModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ExpenseData, FilterProps } from "../models/models";
 import { API_ENDPOINTS } from "../config/apiConfig";
 
-const TransactionsList = ({ filters }: { filters: FilterProps }) => {
+const TransactionsList = ({
+  expenses,
+  refetchExpenses,
+  filters,
+}: {
+  expenses: ExpenseData[];
+  refetchExpenses: () => void;
+  filters?: FilterProps;
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const isDashboard = location.pathname === "/dashboard";
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [expenses, setExpenses] = useState<ExpenseData[]>([]);
-
-  const fetchExpenses = async () => {
-    try {
-      const response = await fetch(API_ENDPOINTS.GET_EXPENSES, {
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch expenses");
-      }
-
-      const data = await response.json();
-      setExpenses(data);
-    } catch (error) {
-      console.error("Error fetching expenses:", error);
-      alert("Could not load expenses.");
-    }
-  };
-
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
 
   const handleSubmit = async (data: ExpenseData) => {
     try {
@@ -56,7 +41,7 @@ const TransactionsList = ({ filters }: { filters: FilterProps }) => {
 
       console.log("Expense added successfully");
       setIsModalOpen(false);
-      fetchExpenses();
+      refetchExpenses();
     } catch (error) {
       console.error("Network error:", error);
       alert("Failed to add expense. Try again.");
@@ -69,11 +54,11 @@ const TransactionsList = ({ filters }: { filters: FilterProps }) => {
         const expenseDate = new Date(expense.date);
 
         return (
-          (!filters.category || expense.category === filters.category) &&
-          (!filters.minPrice || amount >= Number(filters.minPrice)) &&
-          (!filters.maxPrice || amount <= Number(filters.maxPrice)) &&
-          (!filters.minDate || expenseDate >= new Date(filters.minDate)) &&
-          (!filters.maxDate || expenseDate <= new Date(filters.maxDate))
+          (!filters?.category || expense.category === filters.category) &&
+          (!filters?.minPrice || amount >= Number(filters.minPrice)) &&
+          (!filters?.maxPrice || amount <= Number(filters.maxPrice)) &&
+          (!filters?.minDate || expenseDate >= new Date(filters.minDate)) &&
+          (!filters?.maxDate || expenseDate <= new Date(filters.maxDate))
         );
       })
     : [];
@@ -102,7 +87,10 @@ const TransactionsList = ({ filters }: { filters: FilterProps }) => {
 
       <div>
         {transactionsToDisplay.length > 0 ? (
-          transactionsToDisplay.slice(0, 5).map((expense) => (
+          (isDashboard
+            ? transactionsToDisplay.slice(0, 4)
+            : transactionsToDisplay
+          ).map((expense) => (
             <Transaction
               key={expense.id}
               category={expense.category}

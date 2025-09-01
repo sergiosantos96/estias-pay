@@ -1,10 +1,13 @@
 import { FaWallet } from "react-icons/fa";
 import { FaDownLong, FaUpLong } from "react-icons/fa6";
-import type { CurrentBalance } from "../models/models";
 import { useEffect, useState } from "react";
 import { API_ENDPOINTS } from "../config/apiConfig";
+import type { CurrentBalanceProps } from "../models/models";
 
-const CurrentBalance: React.FC<CurrentBalance> = ({ expenses, income }) => {
+const CurrentBalance: React.FC<CurrentBalanceProps> = ({
+  expenses,
+  income,
+}) => {
   const [budget, setBudget] = useState<number | null>(null);
 
   const fetchBudget = async () => {
